@@ -12,4 +12,3 @@
 )]
 
 pub mod html;
-pub mod tree;
