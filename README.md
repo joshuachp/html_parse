@@ -7,7 +7,7 @@
     <img alt="docs.rs" src="https://img.shields.io/docsrs/html_parse">
 </a>
 
-Wrapper for [`html5ever`](https://docs.rs/html5ever/), implementing the Sink.
+Html parser, wrapper for [`html5ever`](https://docs.rs/html5ever/).
 
 ## TODO
 
