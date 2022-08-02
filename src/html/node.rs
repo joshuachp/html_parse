@@ -34,10 +34,6 @@ impl Node {
             _ => None,
         }
     }
-
-    pub fn is_text(&self) -> bool {
-        matches!(self, Node::Text(_))
-    }
 }
 
 /// A doctype.

@@ -75,9 +75,8 @@ impl TreeSink for Html {
                 let mut cursor = self.tree.cursor(parent).unwrap();
 
                 if cursor.last_child().is_ok() {
-                    match cursor.get_mut() {
-                        Node::Text(last_child) => last_child.text.push_tendril(&text),
-                        _ => {}
+                    if let Node::Text(last_child) = cursor.get_mut() {
+                        last_child.text.push_tendril(&text);
                     }
                 } else {
                     self.tree
