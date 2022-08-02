@@ -4,7 +4,7 @@ description = "Html parser, wrapper of html5ever"
 repository = "https://github.com/joshuachp/forest-ds"
 keywords = ["html", "parser", "html5ever"]
 categories = ["html", "parser"]
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 
