@@ -15,9 +15,12 @@ mod tree_sink;
 /// Create by parsing a document or fragment
 #[derive(Debug, Clone)]
 pub struct Html {
-    tree: Tree<Node>,
-    quirks_mode: QuirksMode,
-    errors: Vec<Cow<'static, str>>,
+    /// The tree of the parsed HTML
+    pub tree: Tree<Node>,
+    /// QuirksMode
+    pub quirks_mode: QuirksMode,
+    /// Errors during parsing
+    pub errors: Vec<Cow<'static, str>>,
 }
 
 impl Html {
