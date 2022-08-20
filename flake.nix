@@ -20,49 +20,54 @@
       flake = false;
     };
   };
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    naersk,
-    fenix,
-    ...
-  }: let
-    eachDefaultSystemMap = flake-utils.lib.eachDefaultSystemMap;
-  in rec {
-    packages = eachDefaultSystemMap (system: let
-      naersk-lib = naersk.lib.${system};
-      fenix-pkg = fenix.packages.${system}.stable;
-    in {
-      default =
-        (naersk-lib.override {
-          inherit (fenix-pkg) cargo rustc;
-        })
-        .buildPackage {root = ./.;};
-    });
-    apps = eachDefaultSystemMap (system: {
-      default = flake-utils.lib.mkApp {
-        drv = packages.${system}.default;
-      };
-    });
-    devShells = eachDefaultSystemMap (system: let
-      pkgs = import nixpkgs {inherit system;};
-      fenix-pkg = fenix.packages.${system}.stable;
-    in {
-      default = pkgs.mkShell {
-        buildInputs = [
-          (fenix-pkg.withComponents [
-            "cargo"
-            "clippy"
-            "rust-src"
-            "rustc"
-            "rustfmt"
-          ])
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , naersk
+    , fenix
+    , ...
+    }:
+    let
+      eachDefaultSystemMap = flake-utils.lib.eachDefaultSystemMap;
+    in
+    rec {
+      packages = eachDefaultSystemMap (system:
+        let
+          naersk-lib = naersk.lib.${system};
+          fenix-pkg = fenix.packages.${system}.stable;
+        in
+        {
+          default =
+            (naersk-lib.override {
+              inherit (fenix-pkg) cargo rustc;
+            }).buildPackage { root = ./.; };
+        });
+      apps = eachDefaultSystemMap (system: {
+        default = flake-utils.lib.mkApp {
+          drv = packages.${system}.default;
+        };
+      });
+      devShells = eachDefaultSystemMap (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+          fenix-pkg = fenix.packages.${system}.stable;
+        in
+        {
+          default = pkgs.mkShell {
+            buildInputs = [
+              (fenix-pkg.withComponents [
+                "cargo"
+                "clippy"
+                "rust-src"
+                "rustc"
+                "rustfmt"
+              ])
 
-          # TODO: fix error unsupported system
-          pkgs.pre-commit
-        ];
-      };
-    });
-  };
+              # TODO: fix error unsupported system
+              pkgs.pre-commit
+            ];
+          };
+        });
+    };
 }
