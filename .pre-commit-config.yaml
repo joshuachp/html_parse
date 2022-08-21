@@ -9,10 +9,11 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/joshuachp/pre-commit-hooks
-    rev: 0.1.16
+    rev: 0.1.19
     hooks:
       - id: rust-fmt
       - id: rust-clippy
+      - id: rust-build
       - id: rust-test
       - id: nix-nixpkgs-fmt
       - id: nix-flake-check
