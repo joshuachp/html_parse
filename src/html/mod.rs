@@ -10,6 +10,8 @@ use html5ever::{
 use self::node::Node;
 
 mod node;
+#[cfg(feature = "serde")]
+mod serde;
 mod tree_sink;
 
 /// Create by parsing a document or fragment
