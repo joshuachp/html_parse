@@ -1,6 +1,7 @@
-use std::{collections::HashSet, ops::Deref};
+use std::ops::Deref;
 
 use html5ever::{tendril::StrTendril, Attribute, LocalName, QualName};
+use indexmap::IndexSet;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Node {
@@ -75,7 +76,7 @@ pub struct Element {
     pub id: Option<LocalName>,
 
     /// The element classes.
-    pub classes: HashSet<LocalName>,
+    pub classes: IndexSet<LocalName>,
 
     /// The element attributes.
     pub attrs: Attributes,
@@ -89,10 +90,10 @@ impl Element {
             .find(|a| a.name.local.deref() == "id")
             .map(|a| LocalName::from(a.value.deref()));
 
-        let classes: HashSet<LocalName> = attrs
+        let classes: IndexSet<LocalName> = attrs
             .iter()
             .find(|a| a.name.local.deref() == "class")
-            .map_or(HashSet::new(), |a| {
+            .map_or(IndexSet::new(), |a| {
                 a.value
                     .deref()
                     .split_whitespace()
