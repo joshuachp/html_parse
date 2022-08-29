@@ -4,7 +4,7 @@ description = "Html parser, wrapper of html5ever"
 repository = "https://github.com/joshuachp/forest-ds"
 keywords = ["html", "parser", "html5ever"]
 categories = ["html", "parser"]
-version = "1.0.0"
+version = "1.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 
@@ -20,6 +20,4 @@ serde = { version = "1.0", optional = true }
 serde_json = "1.0"
 
 [features]
-# TODO remove
-default = ["serde"]
 serde = [ "dep:serde", "forest-ds/serde", "indexmap/serde" ]
