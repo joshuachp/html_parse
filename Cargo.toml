@@ -11,13 +11,13 @@ license = "MIT OR Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-forest-ds = "1.0"
-html5ever = "0.26"
-indexmap = "1.9"
-serde = { version = "1.0", optional = true }
+forest-ds = "1.1.5"
+html5ever = "0.26.0"
+indexmap = "1.9.2"
+serde = { version = "1.0.152", optional = true }
 
 [dev-dependencies]
-serde_json = "1.0"
+serde_json = "1.0.93"
 
 [features]
 serde = [ "dep:serde", "forest-ds/serde", "indexmap/serde" ]
