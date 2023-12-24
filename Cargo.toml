@@ -13,7 +13,7 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 forest-ds = "1.1.5"
 html5ever = "0.26.0"
-indexmap = "1.9.2"
+indexmap = "2.1.0"
 serde = { version = "1.0.152", optional = true }
 
 [dev-dependencies]
