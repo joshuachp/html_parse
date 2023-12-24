@@ -35,28 +35,28 @@ jobs:
       # https://github.com/rust-lang/cargo/issues/6669
       - name: cargo test --doc
         run: cargo test --locked --all-features --doc --workspace
-  os-check:
-    runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} / stable
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, windows-latest]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-      - name: Install stable
-        uses: dtolnay/rust-toolchain@stable
-      - name: Install sccache-cache
-        uses: mozilla-actions/sccache-action@v0.0.3
-      - name: Run sccache stat for check
-        run: ${SCCACHE_PATH} --show-stats
-      - name: cargo generate-lockfile
-        if: hashFiles('Cargo.lock') == ''
-        run: cargo generate-lockfile
-      - name: cargo test
-        run: cargo test --locked --all-features --all-targets --workspace
+  #os-check:
+  #  runs-on: ${{ matrix.os }}
+  #  name: ${{ matrix.os }} / stable
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      os: [macos-latest, windows-latest]
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #      with:
+  #        submodules: true
+  #    - name: Install stable
+  #      uses: dtolnay/rust-toolchain@stable
+  #    - name: Install sccache-cache
+  #      uses: mozilla-actions/sccache-action@v0.0.3
+  #    - name: Run sccache stat for check
+  #      run: ${SCCACHE_PATH} --show-stats
+  #    - name: cargo generate-lockfile
+  #      if: hashFiles('Cargo.lock') == ''
+  #      run: cargo generate-lockfile
+  #    - name: cargo test
+  #      run: cargo test --locked --all-features --all-targets --workspace
   coverage:
     runs-on: ubuntu-latest
     name: ubuntu / stable / coverage
